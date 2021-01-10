@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:s_garage/constants.dart';
+import 'package:s_garage/screens/cars/list/cars_list.dart';
+import 'package:s_garage/widgets/menu_card.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,15 +35,34 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
+      backgroundColor: kBgColor,
+      body: Container(
+        padding: EdgeInsets.all(30),
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        alignment: Alignment.center,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            MenuCard(
+              onClick: () {},
+              backgroundColor: kWhite,
+              iconColor: kMainColor,
+              icon: Icons.car_repair,
+              text: "REPAIR",
+              size: (MediaQuery.of(context).size.height - 90) / 2
+            ),
+            SizedBox(height: 30),
+            MenuCard(
+              onClick: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => CarList())
+                );
+              },
+              backgroundColor: kMainColor,
+              iconColor: kWhite,
+              icon: Icons.attach_money,
+              text: "BUY",
+              size: (MediaQuery.of(context).size.height -90) / 2
             ),
           ],
         ),
