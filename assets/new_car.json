@@ -1,0 +1,18 @@
+{
+  "jhjghjghjxcva" : {
+    "mark" : "BMW",
+    "model" : "116i",
+    "seat" : 5,
+    "price" : 27120.0,
+    "km" : 0.0,
+    "date" : "01/2021",
+    "transmission" : "Manuelle",
+    "gears" : 6,
+    "power" : 80,
+    "horsepower": 109,
+    "Fuel" : "Essence",
+    "images" : [
+      "https://www.bmw.be/content/dam/bmw/common/all-models/m-series/m135i/2019/inform/bmw-1-series-m135i-inform-sd-m-performance-package-01.jpg/_jcr_content/renditions/cq5dam.resized.img.1185.large.time1557475879281.jpg"
+    ]
+  }
+}

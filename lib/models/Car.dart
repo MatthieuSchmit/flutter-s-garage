@@ -18,7 +18,7 @@ class Car {
   double horsepower; // cv
   String fuel;
   List<String> images;
-
+  
   Car(Map map) {
     this.mark = map['mark'];
     this.model = map["model"];

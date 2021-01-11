@@ -12,12 +12,35 @@ import 'package:s_garage/models/Car.dart';
 
 class JsonDataSource {
 
-  Future<List<Car>> getAllCars() {
-    return rootBundle.loadString("assets/cars.json").then((jsonString) {
+  Future<List<Car>> getSecondHands({int nb = 0}) {
+    return rootBundle.loadString("assets/second_hand.json").then((jsonString) {
       List<Car> cars = [];
       Map<String,dynamic> jsonResponse = jsonDecode(jsonString);
       jsonResponse.forEach((key, map) {
-        cars.add(new Car(map));
+        if (nb == 0) {
+          cars.add(new Car(map));
+        } else if (cars.length < nb) {
+          cars.add(new Car(map));
+        } else {
+          // break;
+        }
+      });
+      return cars;
+    });
+  }
+
+  Future<List<Car>> getNewCars({int nb = 0}) {
+    return rootBundle.loadString("assets/new_car.json").then((jsonString) {
+      List<Car> cars = [];
+      Map<String,dynamic> jsonResponse = jsonDecode(jsonString);
+      jsonResponse.forEach((key, map) {
+        if (nb == 0) {
+          cars.add(new Car(map));
+        } else if (cars.length < nb) {
+          cars.add(new Car(map));
+        } else {
+          // break;
+        }
       });
       return cars;
     });
