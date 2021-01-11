@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               //height: 60,
               alignment: Alignment.center,
-              child: (_newCarsWidget.length > 0) ? NewCarCard(
+              child: (_carsNew.length > 0) ? NewCarCard(
                 car:  _carsNew[_newCarIndex],
               ) : Text(
                 "Aucun véhicule à vendre n'a été trouvé.",
