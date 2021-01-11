@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:s_garage/constants.dart';
 import 'package:s_garage/models/Car.dart';
 
-class CarListTile extends StatelessWidget {
+class SecondHandListTile extends StatelessWidget {
 
   final Car car;
   final Function onClick;
 
-  CarListTile({
+  SecondHandListTile({
     @required this.car,
     @required this.onClick
   });

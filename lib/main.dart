@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:s_garage/constants.dart';
 import 'package:s_garage/data/json_ds.dart';
 import 'package:s_garage/models/Car.dart';
-import 'package:s_garage/screens/cars/widgets/list_tile.dart';
-import 'package:s_garage/widgets/menu_card.dart';
+import 'package:s_garage/screens/widgets/new_car_card.dart';
+import 'package:s_garage/screens/widgets/second_hand_list_tile.dart';
 
 void main() {
   runApp(MyApp());
@@ -38,6 +38,10 @@ class _MyHomePageState extends State<MyHomePage> {
   JsonDataSource _json;
   List<Car> _carsSec = [];
   List<Car> _carsNew = [];
+
+  List<Widget> _newCarsWidget = [];
+  int _newCarIndex = 0;
+
 
   _MyHomePageState() {
     _json = new JsonDataSource();
@@ -92,7 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               //height: 60,
               alignment: Alignment.center,
-              child: (_carsNew.length > 0) ? _carsNewList() : Text(
+              child: (_newCarsWidget.length > 0) ? NewCarCard(
+                car:  _carsNew[_newCarIndex],
+              ) : Text(
                 "Aucun véhicule à vendre n'a été trouvé.",
                 style: TextStyle(
                     color: kDarkColor,
@@ -139,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _carsList() {
     List<Widget> list = [];
     _carsSec.forEach((car) {
-      list.add(CarListTile(
+      list.add(SecondHandListTile(
         car: car,
         onClick: () {},
       ));
@@ -158,76 +164,14 @@ class _MyHomePageState extends State<MyHomePage> {
         color: kDarkColor,
       ),
       onTap: () {
-
+        setState(() {
+          _newCarIndex ++;
+          if (_newCarIndex == _newCarsWidget.length) _newCarIndex = 0;
+        });
       },
     ));
     return Column(
       children: list,
-    );
-  }
-
-  Widget _carsNewList() {
-    List<Widget> list = [];
-    _carsNew.forEach((car) {
-      list.add(Container(
-        padding: EdgeInsets.all(8),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Text(
-                  "${car.mark} ${car.model}",
-                  style: TextStyle(
-                      color: kDarkColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16
-                  ),
-                ),
-                Text(
-                  " € ${car.price.toStringAsFixed(0)}",
-                  style: TextStyle(
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold
-                  ),
-                ),
-              ],
-            ),
-            Image(
-              image: NetworkImage(car.images[0]),
-              width: MediaQuery.of(context).size.width - 30,
-            )
-          ],
-        ),
-      ));
-    });
-    return Column(
-      children: list,
-    );
-  }
-
-  Widget _tempBody() {
-    return Column(
-      children: <Widget>[
-        MenuCard(
-            onClick: () {},
-            backgroundColor: kWhite,
-            iconColor: kMainColor,
-            icon: Icons.car_repair,
-            text: "REPAIR",
-            size: (MediaQuery.of(context).size.height - 90) / 2
-        ),
-        SizedBox(height: 30),
-        MenuCard(
-            onClick: () {
-
-            },
-            backgroundColor: kMainColor,
-            iconColor: kWhite,
-            icon: Icons.attach_money,
-            text: "BUY",
-            size: (MediaQuery.of(context).size.height -90) / 2
-        ),
-      ],
     );
   }
 
