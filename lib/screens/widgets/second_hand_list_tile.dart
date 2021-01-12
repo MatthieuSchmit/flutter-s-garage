@@ -42,7 +42,7 @@ class SecondHandListTile extends StatelessWidget {
             ),
           ),
           Text(
-            " - ${this.car.km} km",
+            " - ${this.car.km.toStringAsFixed(0)} km",
             style: TextStyle(
                 color: kDarkColor,
                 fontWeight: FontWeight.w400

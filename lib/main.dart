@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:s_garage/constants.dart';
 import 'package:s_garage/data/json_ds.dart';
 import 'package:s_garage/models/Car.dart';
+import 'package:s_garage/screens/cars/info.dart';
+import 'package:s_garage/screens/cars/list_new.dart';
+import 'package:s_garage/screens/cars/list_old.dart';
 import 'package:s_garage/screens/widgets/new_car_card.dart';
 import 'package:s_garage/screens/widgets/second_hand_list_tile.dart';
 
@@ -10,7 +13,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,7 +41,6 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Car> _carsSec = [];
   List<Car> _carsNew = [];
 
-  List<Widget> _newCarsWidget = [];
   int _newCarIndex = 0;
 
 
@@ -96,8 +97,29 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               //height: 60,
               alignment: Alignment.center,
-              child: (_carsNew.length > 0) ? NewCarCard(
-                car:  _carsNew[_newCarIndex],
+              child: (_carsNew.length > 0) ? Column(
+                children: [
+                  NewCarCard(
+                    car:  _carsNew[_newCarIndex],
+                  ),
+                  ListTile(
+                    trailing: Text(
+                      "Tout voir",
+                      style: TextStyle(
+                          color: kDarkColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.push( context,
+                        MaterialPageRoute(
+                          builder: (context) => ListNew()
+                        )
+                      );
+                    },
+                  )
+                ],
               ) : Text(
                 "Aucun véhicule à vendre n'a été trouvé.",
                 style: TextStyle(
@@ -147,7 +169,13 @@ class _MyHomePageState extends State<MyHomePage> {
     _carsSec.forEach((car) {
       list.add(SecondHandListTile(
         car: car,
-        onClick: () {},
+        onClick: () {
+          Navigator.push( context,
+              MaterialPageRoute(
+                  builder: (context) => CarInfo(car)
+              )
+          );
+        },
       ));
     });
     list.add(ListTile(
@@ -164,10 +192,11 @@ class _MyHomePageState extends State<MyHomePage> {
         color: kDarkColor,
       ),
       onTap: () {
-        setState(() {
-          _newCarIndex ++;
-          if (_newCarIndex == _newCarsWidget.length) _newCarIndex = 0;
-        });
+        Navigator.push( context,
+          MaterialPageRoute(
+            builder: (context) => ListOld()
+          )
+        );
       },
     ));
     return Column(

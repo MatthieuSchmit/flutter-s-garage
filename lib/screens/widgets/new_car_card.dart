@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:s_garage/constants.dart';
 import 'package:s_garage/models/Car.dart';
+import 'package:s_garage/screens/cars/info.dart';
 
 class NewCarCard extends StatelessWidget {
 
@@ -13,8 +14,14 @@ class NewCarCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSwitcher(
-      duration: Duration(milliseconds: 1000),
+    return InkWell(
+      onTap: () {
+        Navigator.push( context,
+          MaterialPageRoute(
+            builder: (context) => CarInfo(car)
+          )
+        );
+      },
       child: Container(
         padding: EdgeInsets.all(8),
         child: Column(
